@@ -1,0 +1,252 @@
+
+MASTER.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000136  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001aa  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800060  00800060  000001aa  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001aa  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001dc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b8  00000000  00000000  00000218  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000096d  00000000  00000000  000002d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000075c  00000000  00000000  00000c3d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000044b  00000000  00000000  00001399  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000148  00000000  00000000  000017e4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003c2  00000000  00000000  0000192c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000012c  00000000  00000000  00001cee  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000078  00000000  00000000  00001e1a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_13>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a1 36       	cpi	r26, 0x61	; 97
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 44 00 	call	0x88	; 0x88 <main>
+  74:	0c 94 99 00 	jmp	0x132	; 0x132 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <BLUETOOTH_Init>:
+	
+}
+
+void BLUETOOTH_Transmit(u8 data){
+	
+	UART_Transmit(data);		/* Transmit Data Using UART Protocol */
+  7c:	0e 94 8b 00 	call	0x116	; 0x116 <UART_Init>
+  80:	08 95       	ret
+
+00000082 <BLUETOOTH_Recieved>:
+}
+
+u8 BLUETOOTH_Recieved(void){
+	
+	u8 data = 0 ;			/* Initialize a variable to Save the Data Coming From Bluetooth */
+	data = UART_Received();		/* Receive the Data Using UART Protocol */
+  82:	0e 94 97 00 	call	0x12e	; 0x12e <UART_Received>
+	
+	return data;
+}
+  86:	08 95       	ret
+
+00000088 <main>:
+#include "SPI.h"
+#include "BLUETOOTH.h"
+volatile u8 data ;
+int main(void)
+{
+    BLUETOOTH_Init();
+  88:	0e 94 3e 00 	call	0x7c	; 0x7c <BLUETOOTH_Init>
+	SPI_Init();
+  8c:	0e 94 73 00 	call	0xe6	; 0xe6 <SPI_Init>
+  90:	ff cf       	rjmp	.-2      	; 0x90 <main+0x8>
+
+00000092 <__vector_13>:
+	}
+	
+	
+}
+
+ISR(USART_RXC_vect){
+  92:	1f 92       	push	r1
+  94:	0f 92       	push	r0
+  96:	0f b6       	in	r0, 0x3f	; 63
+  98:	0f 92       	push	r0
+  9a:	11 24       	eor	r1, r1
+  9c:	2f 93       	push	r18
+  9e:	3f 93       	push	r19
+  a0:	4f 93       	push	r20
+  a2:	5f 93       	push	r21
+  a4:	6f 93       	push	r22
+  a6:	7f 93       	push	r23
+  a8:	8f 93       	push	r24
+  aa:	9f 93       	push	r25
+  ac:	af 93       	push	r26
+  ae:	bf 93       	push	r27
+  b0:	ef 93       	push	r30
+  b2:	ff 93       	push	r31
+	
+	data = BLUETOOTH_Recieved();
+  b4:	0e 94 41 00 	call	0x82	; 0x82 <BLUETOOTH_Recieved>
+  b8:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+	SPI_Transmit(data);
+  bc:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+  c0:	0e 94 89 00 	call	0x112	; 0x112 <SPI_Transmit>
+	
+
+	
+}
+  c4:	ff 91       	pop	r31
+  c6:	ef 91       	pop	r30
+  c8:	bf 91       	pop	r27
+  ca:	af 91       	pop	r26
+  cc:	9f 91       	pop	r25
+  ce:	8f 91       	pop	r24
+  d0:	7f 91       	pop	r23
+  d2:	6f 91       	pop	r22
+  d4:	5f 91       	pop	r21
+  d6:	4f 91       	pop	r20
+  d8:	3f 91       	pop	r19
+  da:	2f 91       	pop	r18
+  dc:	0f 90       	pop	r0
+  de:	0f be       	out	0x3f, r0	; 63
+  e0:	0f 90       	pop	r0
+  e2:	1f 90       	pop	r1
+  e4:	18 95       	reti
+
+000000e6 <SPI_Init>:
+#include "SPI.h"
+
+void SPI_Init(void){
+	
+	#if SPI_MODE == MASTER		
+	SET_BIT(SPI_PORT, MOSI);		/* Set Master Output Slave Input */
+  e6:	87 b3       	in	r24, 0x17	; 23
+  e8:	80 62       	ori	r24, 0x20	; 32
+  ea:	87 bb       	out	0x17, r24	; 23
+	CLR_BIT(SPI_PORT, MISO);		/* clear Master Input Slave Output */
+  ec:	87 b3       	in	r24, 0x17	; 23
+  ee:	8f 7b       	andi	r24, 0xBF	; 191
+  f0:	87 bb       	out	0x17, r24	; 23
+	SET_BIT(SPI_PORT, CLK);			
+  f2:	87 b3       	in	r24, 0x17	; 23
+  f4:	80 68       	ori	r24, 0x80	; 128
+  f6:	87 bb       	out	0x17, r24	; 23
+	SET_BIT(SPI_PORT, SS);
+  f8:	87 b3       	in	r24, 0x17	; 23
+  fa:	80 61       	ori	r24, 0x10	; 16
+  fc:	87 bb       	out	0x17, r24	; 23
+	sei();							/* Enable Global Interrupt		 */
+  fe:	78 94       	sei
+	SPCR = 0xD3 ;					
+ 100:	83 ed       	ldi	r24, 0xD3	; 211
+ 102:	8d b9       	out	0x0d, r24	; 13
+	SET_BIT(SPCR,SPIE);				/* Enable SPI Interrupt	Enable   */
+ 104:	8d b1       	in	r24, 0x0d	; 13
+ 106:	80 68       	ori	r24, 0x80	; 128
+ 108:	8d b9       	out	0x0d, r24	; 13
+	SET_BIT(SPCR,SPE);				/* Enable SPI Interrupt			 */
+ 10a:	8d b1       	in	r24, 0x0d	; 13
+ 10c:	80 64       	ori	r24, 0x40	; 64
+ 10e:	8d b9       	out	0x0d, r24	; 13
+ 110:	08 95       	ret
+
+00000112 <SPI_Transmit>:
+}
+
+void SPI_Transmit(u8 data)
+{
+	
+	SPDR = data ;
+ 112:	8f b9       	out	0x0f, r24	; 15
+ 114:	08 95       	ret
+
+00000116 <UART_Init>:
+
+void UART_Transmit(u8 data){
+	
+	UDR = data;												/* sent data to UDR */
+	while (GET_BIT(UCSRA,TXC) != 1);						/* wait until there are no new data currently present */ 
+}
+ 116:	88 e1       	ldi	r24, 0x18	; 24
+ 118:	8a b9       	out	0x0a, r24	; 10
+ 11a:	86 e8       	ldi	r24, 0x86	; 134
+ 11c:	80 bd       	out	0x20, r24	; 32
+ 11e:	87 e6       	ldi	r24, 0x67	; 103
+ 120:	89 b9       	out	0x09, r24	; 9
+ 122:	10 bc       	out	0x20, r1	; 32
+ 124:	78 94       	sei
+ 126:	8a b1       	in	r24, 0x0a	; 10
+ 128:	80 68       	ori	r24, 0x80	; 128
+ 12a:	8a b9       	out	0x0a, r24	; 10
+ 12c:	08 95       	ret
+
+0000012e <UART_Received>:
+
+u8 UART_Received(void){
+	
+	return UDR;
+ 12e:	8c b1       	in	r24, 0x0c	; 12
+ 130:	08 95       	ret
+
+00000132 <_exit>:
+ 132:	f8 94       	cli
+
+00000134 <__stop_program>:
+ 134:	ff cf       	rjmp	.-2      	; 0x134 <__stop_program>
